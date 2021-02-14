@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ public class Person {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
     @NonNull
@@ -34,7 +35,9 @@ public class Person {
 
     private String address;
 
-    private LocalDate birthday;
+    @Valid
+    @Embedded
+    private Birthday birthday;
 
     private String job;
 
