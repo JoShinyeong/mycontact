@@ -21,28 +21,34 @@ public class PersonService {
     private PersonRepository personRepository;
 
 
-   public List<Person> getPeopleExcludeBlocks(){
-       List<Person> people = personRepository.findAll();
+    public List<Person> getPeopleExcludeBlocks() {
+        List<Person> people = personRepository.findAll();
 
 //       List<Block> blocks = blockRepository.findAll();
 //
 //       List<String> blockNames= blocks.stream().map(Block::getName).collect(Collectors.toList());
-      return people.stream().filter(person -> person.getName()==null).collect(Collectors.toList());
-   }
+        return people.stream().filter(person -> person.getName() == null).collect(Collectors.toList());
+    }
 
-   @Transactional(readOnly = true)
-   public Person getPerson(Long id){
-    Person person =personRepository.findById(id).get();
+    @Transactional(readOnly = true)
+    public Person getPerson(Long id) {
+        Person person = personRepository.findById(id).orElse(null);
 
-    log.info("person :  {}", person);
+        log.info("person :  {}", person);
 
-    return person;
+        return person;
 
-   }
+    }
 
-   public  List<Person> getPeopleByName(String name){
-       return personRepository.findByName(name);
-   }
+    public List<Person> getPeopleByName(String name) {
+        return personRepository.findByName(name);
+    }
+
+
+    @Transactional
+    public void put(Person person){
+        personRepository.save(person);
+    }
 
 
 }
