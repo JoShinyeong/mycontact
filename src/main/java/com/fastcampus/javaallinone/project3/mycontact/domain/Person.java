@@ -1,15 +1,17 @@
 package com.fastcampus.javaallinone.project3.mycontact.domain;
 
 
+import com.fastcampus.javaallinone.project3.mycontact.domain.dto.Birthday;
+import com.fastcampus.javaallinone.project3.mycontact.controller.dto.PersonDto;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 @Entity
@@ -17,6 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @RequiredArgsConstructor
+@Where(clause = "deleted = false")
 public class Person {
 
 
@@ -52,11 +55,40 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
+
+    @ColumnDefault("0")
+    private boolean deleted;
+
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true , fetch = FetchType.LAZY)
     @ToString.Exclude
     private Block block;
 
+    public void set(PersonDto personDto) {
+        if (personDto.getAge() != 0) {
+            this.setAge(personDto.getAge());
+        }
 
+        if (!StringUtils.isEmpty(personDto.getHobby())) {
+            this.setHobby(personDto.getHobby());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getBloodType())) {
+            this.setBloodType(personDto.getBloodType());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getAddress())) {
+            this.setAddress(personDto.getAddress());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getJob())) {
+            this.setJob(personDto.getJob());
+        }
+
+        if (!StringUtils.isEmpty(personDto.getPhoneNumber())) {
+            this.setPhoneNumber(personDto.getPhoneNumber());
+        }
+    }
 
 
 }

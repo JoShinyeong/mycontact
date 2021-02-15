@@ -1,4 +1,4 @@
-package com.fastcampus.javaallinone.project3.mycontact.domain;
+package com.fastcampus.javaallinone.project3.mycontact.domain.dto;
 
 
 import lombok.AllArgsConstructor;
