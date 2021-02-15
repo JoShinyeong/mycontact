@@ -10,11 +10,7 @@ import java.util.List;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-List<Person> findByBlockIsNull();
-
 List<Person> findByName(String name);
-
-List<Person> findByBloodType(String bloodType);
 
 @Query(value ="select person from Person person where person.birthday.monthOfBirthday= :monthOfBirthday" )
 List<Person> findByMonthOfBirthday(@Param("monthOfBirthday") int monthOfBirthday);

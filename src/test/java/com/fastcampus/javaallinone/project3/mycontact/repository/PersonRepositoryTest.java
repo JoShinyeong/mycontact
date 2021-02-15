@@ -21,30 +21,18 @@ class PersonRepositoryTest {
         Person person = new Person();
 
         person.setName("john");
-        person.setAge(10);
-        person.setBloodType("A");
 
         personRepository.save(person);
-
-//        System.out.println(personRepository.findAll());
 
         List<Person> result = personRepository.findByName("john");
 
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(1).getName()).isEqualTo("john");
-        assertThat(result.get(1).getAge()).isEqualTo(10);
-        assertThat(result.get(1).getBloodType()).isEqualTo("A");
+        assertThat(result.get(0).getName()).isEqualTo("john");
+//        assertThat(result.get(1).getAge()).isEqualTo(10);
+//        assertThat(result.get(0).getBloodType()).isEqualTo("A");
 
     }
 
-    @Test
-    void findByBloodType(){
-        List<Person> result = personRepository.findByBloodType("A");
-
-        assertThat(result.size()).isEqualTo(2);
-        assertThat(result.get(0).getName()).isEqualTo("martin");
-        assertThat(result.get(1).getName()).isEqualTo("benny");
-    }
 
     @Test
     void findByBirthdayBetween(){

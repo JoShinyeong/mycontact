@@ -18,12 +18,8 @@ public class Birthday {
 
     private Integer yearOfBirthday;
 
-    @Min(1)
-    @Max(12)
     private Integer monthOfBirthday;
 
-    @Min(1)
-    @Max(31)
     private Integer dayOfBirthday;
 
 
@@ -33,4 +29,8 @@ public class Birthday {
         this.dayOfBirthday = birthday.getDayOfMonth();
     }
 
+    public static Birthday of(LocalDate birthday){
+        return new Birthday(birthday);
+
+    }
 }
