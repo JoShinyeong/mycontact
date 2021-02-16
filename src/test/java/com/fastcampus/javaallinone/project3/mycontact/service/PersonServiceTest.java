@@ -25,9 +25,9 @@ class PersonServiceTest {
 
     @Test
     void getPerson() {
-        Person person = personService.getPerson(3L);
+        Person person = personService.getPerson(1L);
 
-        assertThat(person.getName()).isEqualTo("dennis");
+        assertThat(person.getName()).isEqualTo("martin");
 
 
     }

@@ -23,39 +23,36 @@ public class PersonController {
 
 
     @GetMapping
-    @RequestMapping(value ="/{id}")
-    public Person getPerson(@PathVariable Long id){
+    @RequestMapping(value = "/{id}")
+    public Person getPerson(@PathVariable Long id) {
         return personService.getPerson(id);
 
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void postPerson(@RequestBody Person person){
-    personService.put(person);
+    public void postPerson(@RequestBody PersonDto personDto) {
+        personService.put(personDto);
 
-    log.info("person -> {}", personRepository.findAll());
 
     }
 
     @PutMapping("/{id}")
-    public  void  modifyPerson(@PathVariable Long id, PersonDto personDto){
-     personService.modify(id, personDto);
-     log.info("person -> {} ", personRepository.findAll());
+    public void modifyPerson(@PathVariable Long id, @RequestBody PersonDto personDto) {
+        personService.modify(id, personDto);
     }
 
-    @PatchMapping ("/{id}")
-    public void modifyPerson(@PathVariable Long id, String name){
+    @PatchMapping("/{id}")
+    public void modifyPerson(@PathVariable Long id, String name) {
         personService.modify(id, name);
 
-        log.info("person -> {} ", personRepository.findAll());
 
     }
+
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable Long id){
+    public void deletePerson(@PathVariable Long id) {
         personService.delete(id);
 
-        log.info("person -> {} ", personRepository.findAll());
     }
 
 }
